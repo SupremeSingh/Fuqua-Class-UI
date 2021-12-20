@@ -2,8 +2,13 @@ import * as React from 'react';
 import { FunctionComponent } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import {
+    BrowserRouter as Router,
+    Link
+  } from "react-router-dom";
 
-import { BasicButtons } from "./Button";
+import { BasicButtons } from "./Button-FBase";
 
 type CardProps = {
     title: string,
@@ -12,7 +17,7 @@ type CardProps = {
     handleAction: any
   }
 
-export const BasicTextFields: FunctionComponent<CardProps> = ({ title, setEmail, setPassword, handleAction }) => {
+export const LoginTextField: FunctionComponent<CardProps> = ({ title, setEmail, setPassword, handleAction }) => {
     return (
         <div>
             <div className="heading-container">
@@ -33,6 +38,12 @@ export const BasicTextFields: FunctionComponent<CardProps> = ({ title, setEmail,
                 <TextField id="password" label="Enter the Password" variant="outlined" onChange={(e) => setPassword(e.target.value)}/>
             </Box>
             <BasicButtons title = {title} handleAction={handleAction} />
+            <br />
+            <br />
+        
+            <Link to="./register" style={{ textDecoration: 'none' }}>
+                <Button variant="contained">{"Register New Account"}</Button>     
+            </Link>
         </div>
     );
 }

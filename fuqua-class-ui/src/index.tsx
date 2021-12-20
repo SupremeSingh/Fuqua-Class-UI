@@ -9,9 +9,11 @@ import { DAppProvider } from "@usedapp/core";
 
 ReactDOM.render(
   <React.StrictMode>
+    <Router>
     <DAppProvider config={{}}>
       <App />
     </DAppProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
