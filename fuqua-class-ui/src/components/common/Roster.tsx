@@ -36,20 +36,22 @@ export const Roster: FunctionComponent<CardProps> = ({ }) => {
   const fetchData = async() =>{
     const q = query(collection(db, "users"));
     const querySnapshot = await getDocs(q);
+    const dataArray = [] as any;
 
     querySnapshot.forEach((doc) => {
       let dataBlock = doc.data();
-      if (dataBlock.role.toLowerCase() === "Student") {
-        setRows([... rows, doc.data()]);
+      if (dataBlock.role.toLowerCase() === "student") {
+        dataArray.push(doc.data());
       }
     });
+
+    setRows(dataArray);
   }
   
   useEffect(() => {
     fetchData();
   }, [])
 
-  console.log(rows);
 
 return (
     <div>
