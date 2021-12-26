@@ -38,6 +38,7 @@ export const LoginTextField: FunctionComponent<CardProps> = ({ title, setEmail, 
                 <TextField id="password" label="Enter the Password" variant="outlined" onChange={(e) => setPassword(e.target.value)}/>
             </Box>
             <BasicButtons title = {title} handleAction={handleAction} />
+            
             <br />
             <br />
         

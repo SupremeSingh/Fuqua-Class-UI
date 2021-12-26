@@ -14,7 +14,8 @@ import {
   Paper,
 } from "@mui/material";
 
-const LINK = "0x01BE23585060835E02B77ef475b0Cc51aA1e0709";
+const FQOne = "0x451A3C5ae32A0800Ef2668Ceb07DFC294fd43775";
+const BlueBlock = "0xd45a730cf0cf02753aff1e5ec3543b510576529d";
 
 type CardProps = {
   title: string;
@@ -23,8 +24,9 @@ type CardProps = {
 export const MetaMaskButtons: FunctionComponent<CardProps> = ({ title }) => {
   const { activateBrowserWallet, account } = useEthers();
   const etherBalance = useEtherBalance(account);
-  const linkTokenBalance = useTokenBalance(LINK, account);
-
+  const FQOneTokenBalance = useTokenBalance(FQOne, account);
+  const BlueBlockTokenBalance = useTokenBalance(BlueBlock, account);
+  
   function createData(name: string, balance: any, ticker: string) {
     return { name, balance, ticker };
   }
@@ -36,10 +38,15 @@ export const MetaMaskButtons: FunctionComponent<CardProps> = ({ title }) => {
       "ETH"
     ),
     createData(
-      "Link Token",
-      parseFloat(formatEther(linkTokenBalance ?? 0)).toFixed(3),
-      "LINK"
+      "FQ1 Token",
+      parseFloat(formatEther(FQOneTokenBalance ?? 0)).toFixed(3),
+      "FQ1"
     ),
+    createData(
+      "Blue Block",
+      parseFloat(formatEther(BlueBlockTokenBalance ?? 0)).toFixed(3),
+      "BB"
+    )
   ];
 
   function handleConnectWallet() {

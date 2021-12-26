@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable rest-spread-spacing */
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import { FunctionComponent } from "react";
 import { BasicButtons } from "./Button-FBase";
 import { MetaMaskButtons } from "./Button-MM";
@@ -11,6 +12,7 @@ import {
   doc,
   getDocs,
   onSnapshot,
+  where
 } from "firebase/firestore";
 import {
   Table,
@@ -24,32 +26,34 @@ import {
 import { db } from "../../firebase";
 
 type CardProps = {
-    handleAction: any;
+
 };
 
-export const Roster: FunctionComponent<CardProps> = ({ handleAction }) => {
+export const Roster: FunctionComponent<CardProps> = ({ }) => {
 
-const [rows, setRows] = useState([{}]);
+  const [rows ,setRows]=useState([] as any)
 
-// Start the fetch operation as soon as
-// the page loads
-window.addEventListener('load', () => {
-    fetchData("Student");
-  });
+  const fetchData = async() =>{
+    const q = query(collection(db, "users"));
+    const querySnapshot = await getDocs(q);
 
-function createData(name: string, course: string, publicKey: any) {
-  return { name, course, publicKey };
-}
+    querySnapshot.forEach((doc) => {
+      let dataBlock = doc.data();
+      if (dataBlock.role.toLowerCase() === "Student") {
+        setRows([... rows, doc.data()]);
+      }
+    });
+  }
+  
+  useEffect(() => {
+    fetchData();
+  }, [])
 
-
-const querySnapshot = await getDocs(collection(db, "cities"));
-querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  console.log(doc.id, " => ", doc.data());
-});
+  console.log(rows);
 
 return (
     <div>
+      <h3>Class Roster</h3>
       <div className="roster">
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="Metamask Account">
@@ -62,15 +66,15 @@ return (
               </TableRow>
             </TableHead>
             <TableBody>
-              {rows.map((row: any) => (
+              {rows && rows.map((row: any) => (
                 <TableRow
-                  key={row.name}
+                  key={row.publickKey}
                   sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                 >
                   <TableCell component="th" scope="row">
-                    {row.name}
+                    {row.firstName + " " + row.lastName}
                   </TableCell>
-                  <TableCell align="left">{row.course}</TableCell>
+                  <TableCell align="left">{row.courseName}</TableCell>
                   <TableCell align="left">{row.publicKey}</TableCell>
                   <TableCell align="center">
                     {<SendButtons title="Send" />}

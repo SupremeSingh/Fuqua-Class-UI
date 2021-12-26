@@ -92,7 +92,7 @@ function App() {
               const unsub = onSnapshot(doc(db, "users", uid), (doc) => {
                 let userData = doc.data();
                 let role = userData?.role ?? "No Role Assigned";
-                if (role === "Student") {
+                if (role.toLowerCase() === "student") {
                   navigator("./Home_Student");
                 } else {
                   navigator("./Home_Admin");

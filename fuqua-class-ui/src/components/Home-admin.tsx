@@ -67,7 +67,7 @@ export const Home_Admin: FunctionComponent<CardProps> = ({ handleAction }) => {
       <br />
       <br />
 
-      <Roster /> 
+      <Roster />  
 
       <br />
       <br />
