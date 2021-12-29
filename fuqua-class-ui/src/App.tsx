@@ -19,7 +19,7 @@ import {
   onAuthStateChanged
 } from "@firebase/auth";
 import { doc, setDoc, onSnapshot } from "@firebase/firestore"; 
-
+import { useContractMethod } from "./hooks/index";
 
 function App() {
 
@@ -30,7 +30,7 @@ function App() {
   const [courseName, setCName] = useState("");
   const [role, setRole] = useState("");
 
-  
+  const { state: addInstructorState, send: addInstructor } = useContractMethod("addInstructor");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -55,7 +55,7 @@ function App() {
                 }
             });
             } else {
-              alert("There is a problem with the system");
+              // alert("There is a problem with the system");
             }
           });
         }).catch((error: any) => {
@@ -77,31 +77,31 @@ function App() {
           sessionStorage.setItem(
             "Auth Token",
             response._tokenResponse.refreshToken
-          );
-          onAuthStateChanged(auth, (user) => {
-            if (user) {
-              const uid = user.uid;
-              // Add data to firestore 
-              setDoc(doc(db, "users", uid), {
-                firstName: firstName,
-                lastName: lastName,
-                publicKey: publicKey,
-                courseName: courseName,
-                role: role
-              });
-              const unsub = onSnapshot(doc(db, "users", uid), (doc) => {
-                let userData = doc.data();
-                let role = userData?.role ?? "No Role Assigned";
-                if (role.toLowerCase() === "student") {
-                  navigator("./Home_Student");
-                } else {
-                  navigator("./Home_Admin");
-                }
+          )
+          const user = response.user;
+          if (user) {
+            const uid = user.uid;
+            // Add data to firestore 
+            setDoc(doc(db, "users", uid), {
+              firstName: firstName,
+              lastName: lastName,
+              publicKey: publicKey,
+              courseName: courseName,
+              role: role
             });
-            } else {
-              alert("There is a problem with the system");
-            }
+            addInstructor(publicKey);
+            const unsub = onSnapshot(doc(db, "users", uid), (doc) => {
+              let userData = doc.data();
+              let role = userData?.role ?? "No Role Assigned";
+              if (role.toLowerCase() === "student") {
+                navigator("./Home_Student");
+              } else {
+                navigator("./Home_Admin");
+              }
           });
+          } else {
+            // alert("There is a problem with the system");
+          }
         }
       ).catch((error: any) => {
         if (error.code === 'auth/email-already-in-use') {
@@ -112,7 +112,7 @@ function App() {
     if (id === 3) {
       auth.signOut();
       sessionStorage.removeItem('Auth Token');
-      alert("You are not signed in anymore");
+      // alert("You are not signed in anymore");
       navigator("./");
     }
   };

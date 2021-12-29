@@ -14,7 +14,7 @@ import {
   Paper,
 } from "@mui/material";
 
-const FQOne = "0x451A3C5ae32A0800Ef2668Ceb07DFC294fd43775";
+const FQOne = "0xa016d1308a9c21a6d0785a563ab4c1064df3e11e";
 const BlueBlock = "0xd45a730cf0cf02753aff1e5ec3543b510576529d";
 
 type CardProps = {
@@ -40,7 +40,7 @@ export const MetaMaskButtons: FunctionComponent<CardProps> = ({ title }) => {
     createData(
       "FQ1 Token",
       parseFloat(formatEther(FQOneTokenBalance ?? 0)).toFixed(3),
-      "FQ1"
+      "SYM"
     ),
     createData(
       "Blue Block",

@@ -5,6 +5,7 @@ import { MetaMaskButtons } from "./common/Button-MM";
 import { SendButtons } from "./common/Button-SendMoney";
 import { Roster } from "./common/Roster";
 
+
 import Box from "@mui/material/Box";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import {
@@ -43,7 +44,7 @@ export const Home_Admin: FunctionComponent<CardProps> = ({ handleAction }) => {
         publicKey = userData?.publicKey ?? "No Public Key";
       });
     } else {
-      alert("User not signed in");
+      // alert("User not signed in");
       console.log("User not signed in");
     }
   });

@@ -1,0 +1,1 @@
+export const balanceHandlerContractAddress = "0xB633464B606D65E15911e3cDd9488aDBAF50bf07";

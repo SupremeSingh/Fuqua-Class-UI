@@ -29,7 +29,7 @@ export const Home_Student: FunctionComponent<CardProps> = ({
 
     });
     } else {
-      alert("User not signed in");
+      // alert("User not signed in");
       console.log("You are not signed in anymore");
     }
   });
