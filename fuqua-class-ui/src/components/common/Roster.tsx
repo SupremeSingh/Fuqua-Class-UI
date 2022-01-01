@@ -54,7 +54,13 @@ export const Roster: FunctionComponent<CardProps> = ({}) => {
       let dataBlock = doc.data();
       if (dataBlock.role.toLowerCase() === "student") {
         dataArray.push(doc.data());
-        balanceDict[dataBlock.publicKey] = await checkBalance(dataBlock.publicKey); 
+        let balance = await checkBalance(dataBlock.publicKey)
+        if (balance !== undefined) {
+          // console.log(balance)
+          balanceDict[dataBlock.publicKey] = balance; 
+        } else {
+          balanceDict[dataBlock.publicKey] = 0; 
+        }
       }
     });
 
@@ -116,7 +122,7 @@ export const Roster: FunctionComponent<CardProps> = ({}) => {
               <TableRow>
                 <TableCell align="left">Name</TableCell>
                 <TableCell align="left">Course</TableCell>
-                <TableCell align="left">Key</TableCell>
+                <TableCell align="left">FQ1 Balance</TableCell>
                 <TableCell align="center">Send</TableCell>
               </TableRow>
             </TableHead>

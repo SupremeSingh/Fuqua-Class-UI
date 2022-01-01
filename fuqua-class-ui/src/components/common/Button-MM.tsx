@@ -1,9 +1,9 @@
 import * as React from "react";
-import { FunctionComponent } from "react";
+import { FunctionComponent, useState } from "react";
 import Button from "@mui/material/Button";
 import { List, ListItem, Divider, ListItemText } from "@mui/material";
 import { useEthers, useEtherBalance, useTokenBalance } from "@usedapp/core";
-import { formatEther } from "@ethersproject/units";
+import { formatEther, formatUnits } from "@ethersproject/units";
 import {
   Table,
   TableBody,
@@ -14,8 +14,6 @@ import {
   Paper,
 } from "@mui/material";
 
-const FQOne = "0xa016d1308a9c21a6d0785a563ab4c1064df3e11e";
-const BlueBlock = "0xd45a730cf0cf02753aff1e5ec3543b510576529d";
 
 type CardProps = {
   title: string;
@@ -23,9 +21,10 @@ type CardProps = {
 
 export const MetaMaskButtons: FunctionComponent<CardProps> = ({ title }) => {
   const { activateBrowserWallet, account } = useEthers();
-  const etherBalance = useEtherBalance(account);
-  const FQOneTokenBalance = useTokenBalance(FQOne, account);
-  const BlueBlockTokenBalance = useTokenBalance(BlueBlock, account);
+  
+  const FQOne = "0xa016d1308a9c21a6d0785a563ab4c1064df3e11e";
+  const BlueBlock = "0xd45a730cf0cf02753aff1e5ec3543b510576529d";
+
   
   function createData(name: string, balance: any, ticker: string) {
     return { name, balance, ticker };
@@ -34,24 +33,27 @@ export const MetaMaskButtons: FunctionComponent<CardProps> = ({ title }) => {
   const rows = [
     createData(
       "Ethereum",
-      parseFloat(formatEther(etherBalance ?? 0)).toFixed(3),
+      parseFloat(formatEther(useEtherBalance(account) ?? 0)).toFixed(3),
       "ETH"
     ),
     createData(
       "FQ1 Token",
-      parseFloat(formatEther(FQOneTokenBalance ?? 0)).toFixed(3),
+      parseFloat(String(useTokenBalance(FQOne, account)?.toNumber() ?? 0 )).toFixed(3),
       "SYM"
     ),
     createData(
       "Blue Block",
-      parseFloat(formatEther(BlueBlockTokenBalance ?? 0)).toFixed(3),
+      parseFloat(String(useTokenBalance(BlueBlock, account)?.toNumber() ?? 0 )).toFixed(3),
       "BB"
     )
   ];
 
+
+
   function handleConnectWallet() {
     activateBrowserWallet();
   }
+
 
   return account ? (
     <div>
@@ -66,7 +68,7 @@ export const MetaMaskButtons: FunctionComponent<CardProps> = ({ title }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {rows.map((row: any) => (
               <TableRow
                 key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}

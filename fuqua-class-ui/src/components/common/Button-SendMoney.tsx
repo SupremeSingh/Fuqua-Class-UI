@@ -29,12 +29,12 @@ export const SendButtons : FunctionComponent<CardProps> = ({ title, name, addres
 
     const [amount, setAmount] = useState("");
     const { state: rewardStudentState, send: rewardStudent } = useContractMethod("rewardStudent");
-    
+      
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    const handleSend = () => {
+    const handleSend = async () => {
         let amount_int = parseInt(amount);
         if (amount_int !== 0) {
             let amount_with_decimals = amount_int * (10 ** 18);
