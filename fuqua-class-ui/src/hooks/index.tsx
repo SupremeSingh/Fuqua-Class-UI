@@ -13,7 +13,6 @@ var provider = ethers.providers.getDefaultProvider();
 const BalanceHandlerContract = new Contract(
   balanceHandlerContractAddress,
   BalanceHandlerInterface,
-  provider
 );
 
 export function useContractMethod(methodName: string) {

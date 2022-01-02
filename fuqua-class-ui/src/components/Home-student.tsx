@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
+import { SwapButtons } from "./common/Button-Swap";
 
 type CardProps = {
   handleAction: any;
@@ -49,6 +50,9 @@ export const Home_Student: FunctionComponent<CardProps> = ({
         autoComplete="off"
       ></Box>
       <MetaMaskButtons title="Connect Metamask" />
+      <br />
+      <br />
+      <SwapButtons title="Swap" />
       <br />
       <br />
       <BasicButtons title="Log Out" handleAction={handleAction} />
