@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { FunctionComponent } from "react";
-import { BasicButtons } from "./common/Button-FBase";
-import { MetaMaskButtons } from "./common/Button-MM";
-import { SendButtons } from "./common/Button-SendMoney";
+import { BasicButtons } from "./buttons/Button-FBase";
+import { MetaMaskButtons } from "./buttons/Button-MM";
+import { SendButtons } from "./buttons/Button-SendMoney";
 import { Roster } from "./common/Roster";
 
 

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import "./App.css";
-import { LoginTextField } from "./components/common/LoginForm";
-import { RegisterTextField } from "./components/common/RegisterForm";
+import { LoginTextField } from "./components/forms/LoginForm";
+import { RegisterTextField } from "./components/forms/RegisterForm";
 import { Home_Student } from "./components/Home-student";
 import { Home_Admin } from "./components/Home-admin";
 import {

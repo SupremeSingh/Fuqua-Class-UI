@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { FunctionComponent } from "react";
-import { BasicButtons } from "./common/Button-FBase";
-import { MetaMaskButtons } from "./common/Button-MM";
+import { BasicButtons } from "./buttons/Button-FBase";
+import { MetaMaskButtons } from "./buttons/Button-MM";
 import Box from "@mui/material/Box";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../firebase";
-import { SwapButtons } from "./common/Button-Swap";
+import { SwapButtons } from "./buttons/Button-Swap";
 
 type CardProps = {
   handleAction: any;

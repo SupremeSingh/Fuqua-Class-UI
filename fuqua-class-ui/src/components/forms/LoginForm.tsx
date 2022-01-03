@@ -8,7 +8,7 @@ import {
     Link
   } from "react-router-dom";
 
-import { BasicButtons } from "./Button-FBase";
+import { BasicButtons } from "../buttons/Button-FBase";
 
 type CardProps = {
     title: string,

@@ -25,7 +25,6 @@ export const MetaMaskButtons: FunctionComponent<CardProps> = ({ title }) => {
   const FQOne = "0xa016d1308a9c21a6d0785a563ab4c1064df3e11e";
   const BlueBlock = "0xd45a730cf0cf02753aff1e5ec3543b510576529d";
 
-  
   function createData(name: string, balance: any, ticker: string) {
     return { name, balance, ticker };
   }

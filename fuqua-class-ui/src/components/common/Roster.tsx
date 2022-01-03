@@ -1,9 +1,9 @@
 /* eslint-disable rest-spread-spacing */
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { FunctionComponent } from "react";
-import { BasicButtons } from "./Button-FBase";
-import { MetaMaskButtons } from "./Button-MM";
-import { SendButtons } from "./Button-SendMoney";
+import { BasicButtons } from "../buttons/Button-FBase";
+import { MetaMaskButtons } from "../buttons/Button-MM";
+import { SendButtons } from "../buttons/Button-SendMoney";
 import Box from "@mui/material/Box";
 import { getAuth, onAuthStateChanged } from "@firebase/auth";
 import {
@@ -30,6 +30,8 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
 import Select, { SelectChangeEvent } from "@mui/material/Select";
+import { useEthers, useEtherBalance, useTokenBalance } from "@usedapp/core";
+import { formatEther, formatUnits } from "@ethersproject/units";
 
 type CardProps = {};
 
@@ -37,6 +39,8 @@ export const Roster: FunctionComponent<CardProps> = ({}) => {
   let [rows, setRows] = useState([] as any);
   const [balances, setBalances] = useState({} as any);
   const [course, setCourse] = useState("");
+
+  const FQOne = "0xa016d1308a9c21a6d0785a563ab4c1064df3e11e";
 
   const { state: checkBalanceState, send: checkBalance } = useContractMethod("checkBalance");
 
@@ -55,8 +59,8 @@ export const Roster: FunctionComponent<CardProps> = ({}) => {
       if (dataBlock.role.toLowerCase() === "student") {
         dataArray.push(doc.data());
         let balance = await checkBalance(dataBlock.publicKey)
+        console.log(balance)
         if (balance !== undefined) {
-          // console.log(balance)
           balanceDict[dataBlock.publicKey] = balance; 
         } else {
           balanceDict[dataBlock.publicKey] = 0; 

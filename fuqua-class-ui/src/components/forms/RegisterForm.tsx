@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 
-import { BasicButtons } from "./Button-FBase";
+import { BasicButtons } from "../buttons/Button-FBase";
 
 type CardProps = {
     title: string,
