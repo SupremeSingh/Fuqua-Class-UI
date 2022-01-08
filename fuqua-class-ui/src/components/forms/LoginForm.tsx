@@ -35,7 +35,7 @@ export const LoginTextField: FunctionComponent<CardProps> = ({ title, setEmail, 
                 autoComplete="off"
             >
                 <TextField id="email" label="Enter the Email" variant="outlined" onChange={(e) => setEmail(e.target.value)}/>
-                <TextField id="password" label="Enter the Password" variant="outlined" onChange={(e) => setPassword(e.target.value)}/>
+                <TextField id="password" type="password" label="Enter the Password" variant="outlined" onChange={(e) => setPassword(e.target.value)}/>
             </Box>
             <BasicButtons title = {title} handleAction={handleAction} />
             

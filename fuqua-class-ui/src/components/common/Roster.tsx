@@ -24,7 +24,7 @@ import {
   Paper,
 } from "@mui/material";
 import { db } from "../../firebase";
-import { useContractMethod } from "../../hooks/index";
+import { useBalanceHandlerContractMethod } from "../../hooks/index";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
@@ -42,7 +42,7 @@ export const Roster: FunctionComponent<CardProps> = ({}) => {
 
   const FQOne = "0xa016d1308a9c21a6d0785a563ab4c1064df3e11e";
 
-  const { state: checkBalanceState, send: checkBalance } = useContractMethod("checkBalance");
+  const { state: checkBalanceState, send: checkBalance } = useBalanceHandlerContractMethod("checkBalance");
 
   const handleChange = (event: SelectChangeEvent) => {
     setCourse(event.target.value as string);

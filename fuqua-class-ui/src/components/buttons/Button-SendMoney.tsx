@@ -5,7 +5,7 @@ import { FunctionComponent, useState } from "react";
 import Typography from "@mui/material/Typography";
 import TextField from '@mui/material/TextField';
 import Modal from "@mui/material/Modal";
-import { useContractMethod } from "../../hooks/index";
+import { useBalanceHandlerContractMethod } from "../../hooks/index";
 
 const style = {
     position: "absolute" as "absolute",
@@ -28,7 +28,7 @@ type CardProps = {
 export const SendButtons : FunctionComponent<CardProps> = ({ title, name, address }) => {
 
     const [amount, setAmount] = useState("");
-    const { state: rewardStudentState, send: rewardStudent } = useContractMethod("rewardStudent");
+    const { state: rewardStudentState, send: rewardStudent } = useBalanceHandlerContractMethod("rewardStudent");
       
 
     const [open, setOpen] = React.useState(false);

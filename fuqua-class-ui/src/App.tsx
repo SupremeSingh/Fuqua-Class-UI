@@ -19,7 +19,7 @@ import {
   onAuthStateChanged
 } from "@firebase/auth";
 import { doc, setDoc, onSnapshot } from "@firebase/firestore"; 
-import { useContractMethod } from "./hooks/index";
+import { useBalanceHandlerContractMethod } from "./hooks/index";
 
 function App() {
 
@@ -30,7 +30,7 @@ function App() {
   const [courseName, setCName] = useState("");
   const [role, setRole] = useState("");
 
-  const { state: addInstructorState, send: addInstructor } = useContractMethod("addInstructor");
+  const { state: addInstructorState, send: addInstructor } = useBalanceHandlerContractMethod("addInstructor");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");

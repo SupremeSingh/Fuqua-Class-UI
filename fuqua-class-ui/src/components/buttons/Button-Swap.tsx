@@ -5,7 +5,7 @@ import { FunctionComponent, useState } from "react";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
-import { useContractMethod } from "../../hooks/index";
+import { useSwapperContractMethod } from "../../hooks/index";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -33,8 +33,8 @@ export const SwapButtons: FunctionComponent<CardProps> = ({ title }) => {
   const [amount, setAmount] = useState("");
   const [swapFrom, setSwapFrom] = useState("");
   const [swapTo, setSwapTo] = useState("");
-  const { state: rewardStudentState, send: rewardStudent } =
-    useContractMethod("rewardStudent");
+  const { state: SwapTokensState, send: SwapTokens } =
+    useSwapperContractMethod("SwapTokens");
 
   const handleChangeFrom = (event: SelectChangeEvent) => {
     setSwapFrom(event.target.value as string);
@@ -91,8 +91,12 @@ export const SwapButtons: FunctionComponent<CardProps> = ({ title }) => {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={0xd45a730cf0cf02753aff1e5ec3543b510576529d}>Blue Block</MenuItem>
-                <MenuItem value={0xac7fa82f7b2937b0714a61c84fa9902224ad5a65}>Ethereum</MenuItem>
+                <MenuItem value={0xd45a730cf0cf02753aff1e5ec3543b510576529d}>
+                  Blue Block
+                </MenuItem>
+                <MenuItem value={0xac7fa82f7b2937b0714a61c84fa9902224ad5a65}>
+                  Ethereum
+                </MenuItem>
               </Select>
             </FormControl>
           </Box>{" "}
@@ -111,7 +115,9 @@ export const SwapButtons: FunctionComponent<CardProps> = ({ title }) => {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={0xa016d1308a9c21a6d0785a563ab4c1064df3e11e}>FQ1</MenuItem>
+                <MenuItem value={0xa016d1308a9c21a6d0785a563ab4c1064df3e11e}>
+                  FQ1
+                </MenuItem>
               </Select>
             </FormControl>
           </Box>
