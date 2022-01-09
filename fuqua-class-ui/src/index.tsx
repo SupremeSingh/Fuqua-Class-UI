@@ -7,7 +7,10 @@ import {
 import { Mainnet, DAppProvider, Config, Ropsten } from "@usedapp/core";
 
 const config: Config = {
-
+  readOnlyChainId: Ropsten.chainId,
+  readOnlyUrls: {
+    [Ropsten.chainId]: 'https://eth-ropsten.alchemyapi.io/v2/9leoDgecFoI_noGrwAjXq1SdH5QkU_pz',
+  },
 }
 
 ReactDOM.render(

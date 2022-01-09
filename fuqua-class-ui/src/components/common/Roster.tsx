@@ -54,12 +54,12 @@ export const Roster: FunctionComponent<CardProps> = ({}) => {
     let dataArray = [] as any;
     const balanceDict = {} as any;
 
+    // CORRECT HERE
     querySnapshot.forEach(async (doc) => {
       let dataBlock = doc.data();
       if (dataBlock.role.toLowerCase() === "student") {
         dataArray.push(doc.data());
         let balance = await checkBalance(dataBlock.publicKey)
-        console.log(balance)
         if (balance !== undefined) {
           balanceDict[dataBlock.publicKey] = balance; 
         } else {
@@ -89,6 +89,7 @@ export const Roster: FunctionComponent<CardProps> = ({}) => {
    } else if (course == "30") {
     rows = rows.filter((row: { courseName: string; }) => row.courseName.toLowerCase() != "mba" && row.courseName.toLowerCase() != "mms");  
    } 
+
 
   return (
     <div>

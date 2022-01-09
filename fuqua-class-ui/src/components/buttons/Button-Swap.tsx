@@ -36,6 +36,9 @@ export const SwapButtons: FunctionComponent<CardProps> = ({ title }) => {
   const { state: SwapTokensState, send: SwapTokens } =
     useSwapperContractMethod("SwapTokens");
 
+  // 1 is BB, 2 is Eth, 3 is FQ1  
+  const indexToAddress: { [index: string]: string} = {"1" : "0xd45a730cf0cf02753aff1e5ec3543b510576529d", "2" : "0xac7fa82f7b2937b0714a61c84fa9902224ad5a65", "3" : "0xa016d1308a9c21a6d0785a563ab4c1064df3e11e"} as any  
+
   const handleChangeFrom = (event: SelectChangeEvent) => {
     setSwapFrom(event.target.value as string);
   };
@@ -47,8 +50,16 @@ export const SwapButtons: FunctionComponent<CardProps> = ({ title }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  // CORRECT HERE
   const handleSend = async () => {
-    console.log("LALALA");
+    let addressFrom = indexToAddress[swapFrom];
+    let addressTo = indexToAddress[swapTo];
+    
+    await SwapTokens(addressFrom, addressTo, amount);
+    console.log("Token swapping in progress");
+
+    setOpen(false);
   };
 
   return (
@@ -91,10 +102,10 @@ export const SwapButtons: FunctionComponent<CardProps> = ({ title }) => {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={0xd45a730cf0cf02753aff1e5ec3543b510576529d}>
+                <MenuItem value={1}>
                   Blue Block
                 </MenuItem>
-                <MenuItem value={0xac7fa82f7b2937b0714a61c84fa9902224ad5a65}>
+                <MenuItem value={2}>
                   Ethereum
                 </MenuItem>
               </Select>
@@ -115,7 +126,7 @@ export const SwapButtons: FunctionComponent<CardProps> = ({ title }) => {
                 <MenuItem value="">
                   <em>None</em>
                 </MenuItem>
-                <MenuItem value={0xa016d1308a9c21a6d0785a563ab4c1064df3e11e}>
+                <MenuItem value={3}>
                   FQ1
                 </MenuItem>
               </Select>

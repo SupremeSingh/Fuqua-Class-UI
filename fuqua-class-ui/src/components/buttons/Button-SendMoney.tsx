@@ -34,15 +34,18 @@ export const SendButtons : FunctionComponent<CardProps> = ({ title, name, addres
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
+
+    // CORRECT HERE
     const handleSend = async () => {
         let amount_int = parseInt(amount);
         if (amount_int !== 0) {
             let amount_with_decimals = amount_int * (10 ** 18);
-            rewardStudent(address, amount_with_decimals);
+            await rewardStudent(address, amount_with_decimals);
             setAmount("0");
         } else {
             alert("Please enter a value")
         }
+        setOpen(false);
     }
 
     return (
