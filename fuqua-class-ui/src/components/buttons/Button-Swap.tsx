@@ -5,7 +5,7 @@ import { FunctionComponent, useState } from "react";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
-import { useSwapperContractMethod } from "../../hooks/index";
+import { useSwapperContractMethod } from "../../hooks/SwapperHook";
 
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";

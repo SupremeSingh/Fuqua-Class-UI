@@ -24,7 +24,7 @@ import {
   Paper,
 } from "@mui/material";
 import { db } from "../../firebase";
-import { useBalanceHandlerContractMethod } from "../../hooks/index";
+import { useBalanceHandlerContractMethod } from "../../hooks/BalanceHandlerHook";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";

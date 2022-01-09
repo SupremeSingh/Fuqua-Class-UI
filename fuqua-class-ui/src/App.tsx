@@ -19,7 +19,7 @@ import {
   onAuthStateChanged
 } from "@firebase/auth";
 import { doc, setDoc, onSnapshot } from "@firebase/firestore"; 
-import { useBalanceHandlerContractMethod } from "./hooks/index";
+import { useBalanceHandlerContractMethod } from "./hooks/BalanceHandlerHook";
 
 function App() {
 
