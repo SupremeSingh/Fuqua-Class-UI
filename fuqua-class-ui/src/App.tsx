@@ -19,7 +19,6 @@ import {
   onAuthStateChanged
 } from "@firebase/auth";
 import { doc, setDoc, onSnapshot } from "@firebase/firestore"; 
-import { useBalanceHandlerContractMethod } from "./hooks/BalanceHandlerHook";
 
 function App() {
 
@@ -30,7 +29,6 @@ function App() {
   const [courseName, setCName] = useState("");
   const [role, setRole] = useState("");
 
-  const { state: addInstructorState, send: addInstructor } = useBalanceHandlerContractMethod("addInstructor");
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -89,7 +87,6 @@ function App() {
               courseName: courseName,
               role: role
             });
-            addInstructor(publicKey);
             const unsub = onSnapshot(doc(db, "users", uid), (doc) => {
               let userData = doc.data();
               let role = userData?.role ?? "No Role Assigned";

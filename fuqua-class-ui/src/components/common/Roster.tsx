@@ -42,8 +42,6 @@ export const Roster: FunctionComponent<CardProps> = ({}) => {
 
   const FQOne = "0xa016d1308a9c21a6d0785a563ab4c1064df3e11e";
 
-  const { state: checkBalanceState, send: checkBalance } = useBalanceHandlerContractMethod("checkBalance");
-
   const handleChange = (event: SelectChangeEvent) => {
     setCourse(event.target.value as string);
   };
@@ -54,17 +52,11 @@ export const Roster: FunctionComponent<CardProps> = ({}) => {
     let dataArray = [] as any;
     const balanceDict = {} as any;
 
-    // CORRECT HERE
+
     querySnapshot.forEach(async (doc) => {
       let dataBlock = doc.data();
       if (dataBlock.role.toLowerCase() === "student") {
         dataArray.push(doc.data());
-        let balance = await checkBalance(dataBlock.publicKey)
-        if (balance !== undefined) {
-          balanceDict[dataBlock.publicKey] = balance; 
-        } else {
-          balanceDict[dataBlock.publicKey] = 0; 
-        }
       }
     });
 

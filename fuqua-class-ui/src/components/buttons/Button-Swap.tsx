@@ -51,16 +51,6 @@ export const SwapButtons: FunctionComponent<CardProps> = ({ title }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  // CORRECT HERE
-  const handleSend = async () => {
-    let addressFrom = indexToAddress[swapFrom];
-    let addressTo = indexToAddress[swapTo];
-    
-    await SwapTokens(addressFrom, addressTo, amount);
-    console.log("Token swapping in progress");
-
-    setOpen(false);
-  };
 
   return (
     <div>
@@ -144,7 +134,7 @@ export const SwapButtons: FunctionComponent<CardProps> = ({ title }) => {
             onChange={(e) => setAmount(e.target.value)}
           />
           <br /> <br />
-          <Button variant="contained" onClick={handleSend}>
+          <Button variant="contained" onClick={handleOpen}>
             Swap
           </Button>{" "}
           <Button variant="contained" onClick={handleClose}>

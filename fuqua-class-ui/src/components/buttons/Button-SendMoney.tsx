@@ -5,7 +5,6 @@ import { FunctionComponent, useState } from "react";
 import Typography from "@mui/material/Typography";
 import TextField from '@mui/material/TextField';
 import Modal from "@mui/material/Modal";
-import { useBalanceHandlerContractMethod } from "../../hooks/BalanceHandlerHook";
 
 const style = {
     position: "absolute" as "absolute",
@@ -26,26 +25,10 @@ type CardProps = {
   }
 
 export const SendButtons : FunctionComponent<CardProps> = ({ title, name, address }) => {
-
-    const [amount, setAmount] = useState("");
-    const { state: rewardStudentState, send: rewardStudent } = useBalanceHandlerContractMethod("rewardStudent");
       
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-
-    // CORRECT HERE
-    const handleSend = async () => {
-        let amount_int = parseInt(amount);
-        if (amount_int !== 0) {
-            let amount_with_decimals = amount_int * (10 ** 18);
-            await rewardStudent(address, amount_with_decimals);
-            setAmount("0");
-        } else {
-            alert("Please enter a value")
-        }
-        setOpen(false);
-    }
 
     return (
       <div>
@@ -64,9 +47,8 @@ export const SendButtons : FunctionComponent<CardProps> = ({ title, name, addres
               Please indicate a value
             </Typography>
             <br />
-            <TextField id="email" label="Enter Amount" variant="outlined" onChange={(e) => setAmount(e.target.value)}/>
             <br /> <br />
-            <Button variant="contained" onClick={handleSend}>Send</Button>
+            <Button variant="contained" onClick={handleClose}>Send</Button>
             {" "}
             {" "}
             <Button variant="contained" onClick={handleClose}>Cancel</Button>
